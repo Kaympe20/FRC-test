@@ -15,7 +15,7 @@ public class Intake extends SubsystemBase {
   private CANSparkMax intakeRoller = new CANSparkMax(2, MotorType.kBrushless);
   private DigitalInput beamBreak = new DigitalInput(0);
   private AnalogEncoder wristEncoder = new AnalogEncoder(0);
-  private PIDController pid = new PIDController(kP, kI, kD);
+  private PIDController wristPID = new PIDController(kP, kI, kD);
 
 
   public Intake() {
