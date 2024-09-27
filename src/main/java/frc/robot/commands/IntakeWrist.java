@@ -4,8 +4,6 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.AnalogEncoder;
-import com.revrobotics.CANSparkMax;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 
@@ -14,16 +12,12 @@ import edu.wpi.first.wpilibj2.command.PIDCommand;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class IntakeWrist extends PIDCommand {
   /** Creates a new IntakeWrist. */
-  
-private AnalogEncoder wristEncoder = new AnalogEncoder(0);
-private CANSparkMax intakeWrist = new CANSparkMax(1, MotorType.kBrushless);
-
   public IntakeWrist() {
     super(
         // The controller that the command will use
         new PIDController(0, 0, 0),
         // This should return the measurement
-        () -> wristEncoder.get,
+        () -> 0,
         // This should return the setpoint (can also be a constant)
         () -> 0,
         // This uses the output
