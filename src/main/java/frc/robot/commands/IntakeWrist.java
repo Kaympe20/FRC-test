@@ -7,10 +7,8 @@ package frc.robot.commands;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 
-//importing device libraries
-import com.revrobotics.CANSparkMax;
-// import com.revrobotics.CANSparkLowLevel.MotorType;
 import java.util.function.DoubleSupplier;
+import java.util.function.DoubleConsumer;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -18,18 +16,18 @@ import java.util.function.DoubleSupplier;
 public class IntakeWrist extends PIDCommand {
   /** Creates a new IntakeWrist. */
 
-  public IntakeWrist(DoubleSupplier sensorVal, DoubleSupplier setpoint,  CANSparkMax wrist) {
+  public IntakeWrist(DoubleSupplier sensorVal, DoubleSupplier setpoint,  DoubleConsumer wristSetPosition) {
     super(
         // The controller that the command will use
         new PIDController(1, 1, 1),
         // This should return the measurement
         sensorVal,
         // This should return the setpoint (can also be a constant)
-        5, //placeholder value
+        setpoint, //placeholder value
         // This uses the output
         output -> {
           // Use the output here
-          wrist.set(output);
+          wristSetPosition.accept(output);
         });
     // Use addRequirements() here to declare subsystem dependencies.
     // Configure additional PID options by calling `getController` here.
