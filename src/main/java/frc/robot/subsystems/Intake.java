@@ -4,33 +4,14 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj2.command.PIDCommand;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class Intake extends PIDCommand {
+public class Intake extends SubsystemBase {
   /** Creates a new Intake. */
-  public Intake() {
-    super(
-        // The controller that the command will use
-        new PIDController(0, 0, 0),
-        // This should return the measurement
-        () -> 0,
-        // This should return the setpoint (can also be a constant)
-        () -> 0,
-        // This uses the output
-        output -> {
-          // Use the output here
-        });
-    // Use addRequirements() here to declare subsystem dependencies.
-    // Configure additional PID options by calling `getController` here.
-  }
+  public Intake() {}
 
-  // Returns true when the command should end.
   @Override
-  public boolean isFinished() {
-    return false;
+  public void periodic() {
+    // This method will be called once per scheduler run
   }
 }
