@@ -4,47 +4,33 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.commands.IntakeWrist;
-import com.revrobotics.CANSparkMax;
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj2.command.PIDCommand;
 
-public class Intake extends SubsystemBase {
-  private double wristSetpoint = 0;
-  private DutyCycleEncoder encoder = new DutyCycleEncoder(0);
-  private CANSparkMax wrist = new CANSparkMax(0, CANSparkMax.MotorType.kBrushless);
-
-  public void setWristSetpoint(double setpoint) {
-    this.wristSetpoint = setpoint;
-  }
-  private double getWristSetpoint() {
-    return wristSetpoint;
-  }
-
+// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
+// information, see:
+// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+public class Intake extends PIDCommand {
+  /** Creates a new Intake. */
   public Intake() {
-    //initialize IntakeWrist Command
-    new IntakeWrist(encoder::getDistance, this::getWristSetpoint, wrist::set).schedule();
-    new IntakeRoller(1);
+    super(
+        // The controller that the command will use
+        new PIDController(0, 0, 0),
+        // This should return the measurement
+        () -> 0,
+        // This should return the setpoint (can also be a constant)
+        () -> 0,
+        // This uses the output
+        output -> {
+          // Use the output here
+        });
+    // Use addRequirements() here to declare subsystem dependencies.
+    // Configure additional PID options by calling `getController` here.
   }
 
+  // Returns true when the command should end.
   @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
-}
-class IntakeRoller {
-  private CANSparkMax roller;
-
-  public IntakeRoller(int motorPort) {
-    //initialize IntakeRoller
-    roller = new CANSparkMax(motorPort, CANSparkMax.MotorType.kBrushless);
-  }
-
-  public void engageRoller() {
-    roller.set(1);
-  }
-
-  public void disengageRoller() {
-    roller.set(0);
+  public boolean isFinished() {
+    return false;
   }
 }
